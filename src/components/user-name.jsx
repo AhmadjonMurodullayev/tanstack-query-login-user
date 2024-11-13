@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Box, Stack, Button } from "@mui/material";
 import { useDelete } from "../hook/userDelete";
 import { useEdit } from "../hook/userEdit";
-import Modal from "./modal";
+import { Link } from "react-router-dom";
 
 export default function UserName({ id, title, description, born }) {
   const { mutate: deleteClient } = useDelete();
@@ -67,8 +67,10 @@ export default function UserName({ id, title, description, born }) {
           EDIT
         </Button>
 
-<Button onClick={()=> <Modal id={id}/> } variant="contained" color="primary" size="small">
+<Button  variant="contained" color="primary" size="small">
+  <Link to={`/qarz/${id}`}>
           Show
+  </Link>
         </Button>
       </Stack>
     </Box>

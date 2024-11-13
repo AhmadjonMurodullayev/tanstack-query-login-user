@@ -4,6 +4,7 @@ import Home from './pages/home/home'
 import MainLayout from './layout/main-layout'
 import SignIn from './components/sing-in'
 import { Register } from './components/sing-up'
+import QarzQrodact from './components/qarz-prodact'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path='/sing-up' element ={<Register/>}/>
       <Route path="/main-layout" element={<MainLayout />} >
          <Route index element={<Home />} />
+         <Route path='qarz/:id' element={<QarzQrodact/>} />
       </Route>
     </Routes>
 

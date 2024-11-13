@@ -5,6 +5,7 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import { useGetClients } from "../hook/useGetuser";
 import { useCreateClients } from "../hook/usePostuser";
 import UserName from "./user-name";
+import Qarz from "./qarz";
 
 export const Form = () => {
   const { handleSubmit, register, reset } = useForm();
@@ -21,6 +22,7 @@ export const Form = () => {
 
   return (
     <Container maxWidth="sm">
+      <h1>User qushish</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ marginTop: 20, marginBottom: 40 }}
@@ -53,6 +55,8 @@ export const Form = () => {
           Send
         </Button>
       </form>
+      <h1>Qarz berish</h1>
+         <Qarz/>
       {data?.map((item) => (
         <UserName key={item.id} {...item} />
       ))}
