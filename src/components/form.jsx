@@ -21,13 +21,6 @@ export const Form = () => {
 
   return (
     <Container maxWidth="sm">
-      <Link
-        to="/qarz"
-        style={{ textDecoration: "none", color: "green", marginTop: 40 }}
-      >
-        About Qarz
-      </Link>
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ marginTop: 20, marginBottom: 40 }}
@@ -60,7 +53,6 @@ export const Form = () => {
           Send
         </Button>
       </form>
-
       {data?.map((item) => (
         <UserName key={item.id} {...item} />
       ))}

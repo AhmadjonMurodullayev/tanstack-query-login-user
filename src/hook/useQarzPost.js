@@ -1,12 +1,11 @@
-// import { useMutation } from "@tanstack/react-query";
-// import { request } from "../config/request";
-// import { client } from "../config/query-clinet";
+import { useMutation } from "@tanstack/react-query";
+import { request } from "../config/request";
 
-// export const useQarzPost = () => {
-//   return useMutation({
-//     mutationFn: (data) => request.post(`/clent/${data.clientId}`, data),
-//     onSuccess: () => {
-//       client.invalidateQueries(["clent"]);
-//     },
-//   });
-// };
+export const useCreateClientLoan = () => {
+    return useMutation({
+      mutationFn: (data) => request.post(`/qarz`, data),
+      onSuccess: () => {
+        client.invalidateQueries({ queryKey: ["clent"] }); 
+      },
+    });
+  };

@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box, Stack, Button } from "@mui/material";
 import { useDelete } from "../hook/userDelete";
 import { useEdit } from "../hook/userEdit";
+import Modal from "./modal";
 
 export default function UserName({ id, title, description, born }) {
   const { mutate: deleteClient } = useDelete();
@@ -64,6 +65,10 @@ export default function UserName({ id, title, description, born }) {
           size="small"
         >
           EDIT
+        </Button>
+
+<Button onClick={()=> <Modal id={id}/> } variant="contained" color="primary" size="small">
+          Show
         </Button>
       </Stack>
     </Box>

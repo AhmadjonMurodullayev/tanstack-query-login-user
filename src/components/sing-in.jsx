@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCreateUsers } from "../server/login";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { saveState } from "../config/store";
 
 export default function SignIn() {
@@ -19,7 +19,6 @@ export default function SignIn() {
   const onSubmit = (data) => {
     mutate(data, {
       onSuccess: (data) => {
-       
         toast.success("Sign in successful!");
         navigate("/main-layout");
       },
@@ -99,6 +98,11 @@ export default function SignIn() {
           Sign In
         </Button>
       </form>
+      <Button sx={{ marginTop: 2 }} color="error" variant="contained" >
+        <Link style={{ textDecoration: "none", color: "white" }} to="/sing-up">
+          Register
+        </Link>
+      </Button>
 
       <ToastContainer position="top-center" autoClose={3000} />
     </Box>

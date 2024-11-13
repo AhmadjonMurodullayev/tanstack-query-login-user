@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useMutation } from "@tanstack/react-query";
-import { request } from '../config/request';
-import { client } from '../config/query-clinet';
-import { useGetClients } from '../hook/useGetuser';
-
-const useCreateClientLoan = () => {
-  return useMutation({
-    mutationFn: (data) => request.post(`/clent/${data.clientId}/qarz`, data),
-    onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["clent"] }); 
-    },
-  });
-};
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useCreateClientLoan } from "../hook/useQarzPost";
+import { useGetClients } from "../hook/useGetuser";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 export default function Qarz() {
   const { handleSubmit, reset, register } = useForm();
@@ -27,36 +26,62 @@ export default function Qarz() {
     } else {
       alert("Please select a client.");
     }
-    console.log(data);
-    
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        maxWidth: 400,
+        mx: "auto",
+        p: 3,
+        boxShadow: 3,
+        borderRadius: 2,
+        bgcolor: "background.paper",
+      }}
+    >
+      <Typography variant="h5" align="center" gutterBottom>
+        Add Client Loan
+      </Typography>
       <form onSubmit={handleSubmit(submit)}>
-        <select 
-          value={selectedClient} 
-          onChange={(e) => setSelectedClient(e.target.value)} 
-          required
-        >
-          <option value="">Select Client</option>
-          {isLoading ? (
-            <option>Loading clients...</option>
-          ) : (
-            clients?.map((client) => (
-              <option key={client.id} value={client.id}>
-                {client.name}
-              </option>
-            ))
-          )}
-        </select>
-        <input 
-          type="text" 
-          placeholder="Beriladigan summa" 
-          {...register("amount", { required: true })} 
+        <FormControl fullWidth >
+          <InputLabel>Select Client</InputLabel>
+          <Select
+            value={selectedClient}
+            onChange={(e) => setSelectedClient(e.target.value)}
+            label="Select Client"
+          >
+            {isLoading ? (
+              <MenuItem value="">
+                <em>Loading clients...</em>
+              </MenuItem>
+            ) : (
+              clients?.map((client) => (
+                <Me
+                nuItem  key={client.id} value={client.id}>
+                  {client.name}
+                </Me>
+              ))
+            )}
+          </Select>
+        </FormControl>
+
+        <TextField
+          fullWidth
+          label="Beriladigan summa"
+          margin="normal"
+          {...register("amount", { required: true })}
         />
-        <button type="submit">Add Loan</button>
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
+          Add Loan
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 }
